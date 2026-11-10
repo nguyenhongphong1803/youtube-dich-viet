@@ -3,3 +3,19 @@
 Thumbs.db
 node_modules/
 *.log
+
+# Khóa, chứng chỉ, bí mật — KHÔNG BAO GIỜ commit
+*.pem
+*.crx
+*.key
+*.p12
+*.pfx
+.env
+.env.*
+secrets*
+
+# IDE / hệ thống
+.vscode/
+.idea/
+*.tmp
+desktop.ini

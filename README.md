@@ -1,5 +1,9 @@
 # YouTube Dịch Việt
 
+> **Người dùng mới? Đọc [HƯỚNG DẪN SỬ DỤNG](HUONG-DAN-SU-DUNG.md)**: cách tải, cài vào Chrome/Edge, cài giọng đọc tiếng Việt và xử lý sự cố, viết từng bước cho người không rành máy tính.
+>
+> Trang chính thức của dự án: https://github.com/nguyenhongphong1803/youtube-dich-viet
+
 Extension Chrome (Manifest V3) giúp xem video YouTube tiếng nước ngoài:
 
 1. **Hiển thị phụ đề tiếng Việt** ngay trên video (hỗ trợ cả chế độ rạp hát và toàn màn hình).
@@ -29,10 +33,10 @@ Yêu cầu Chrome 111 trở lên (cần content script chạy ở `world: "MAIN"
 
 ### Cách (b): Tải từ GitHub
 
-1. Mở trang GitHub của dự án: `<LINK_GITHUB>`.
+1. Mở trang GitHub của dự án: `https://github.com/nguyenhongphong1803/youtube-dich-viet`.
 2. Tải mã nguồn bằng một trong hai cách:
    - Bấm nút **Code → Download ZIP**, rồi giải nén ra một thư mục cố định; hoặc
-   - Dùng git: `git clone <LINK_GITHUB>`
+   - Dùng git: `git clone https://github.com/nguyenhongphong1803/youtube-dich-viet`
 3. Làm tiếp như bước 3–5 ở cách (a): vào `chrome://extensions`, bật **Developer mode**, bấm **Load unpacked** và chọn thư mục chứa `manifest.json`.
 
 > **Microsoft Edge** làm tương tự, chỉ khác là vào địa chỉ `edge://extensions`.
@@ -111,3 +115,14 @@ icons/          Biểu tượng
 ## Gỡ lỗi
 
 Mở DevTools (F12) trên tab YouTube, tab Console, lọc theo `[YT-Dịch]` để xem log của extension.
+
+## Dành cho người đóng góp / phát hành: lưu ý bảo mật
+
+Repo này là **công khai**. Mọi thứ đã commit (kể cả trong lịch sử git) đều ai cũng xem được.
+
+- **KHÔNG commit file `.pem`.** Chrome tạo file này khi bấm **Pack extension** (Đóng gói tiện ích). Đây là **khóa riêng** dùng để ký extension; nếu lộ ra, người khác có thể ký và phát hành bản cập nhật giả mạo dưới danh nghĩa extension này.
+- **KHÔNG commit** file `.crx`, `.env`, khóa API, token, mật khẩu.
+- Extension hiện **không dùng khóa API nào**. Nếu sau này cần thêm, hãy đặt khóa trong một file bị `.gitignore` chặn (ví dụ `.env`, `secrets.json`), **không viết thẳng vào code**.
+- `.gitignore` đã chặn sẵn: `*.pem`, `*.crx`, `*.key`, `*.p12`, `*.pfx`, `.env`, `.env.*`, `secrets*`, `*.zip`, `.vscode/`, `.idea/`...
+- **Trước khi push**, chạy `git status` (và `git diff --cached` nếu cần) để xem lại danh sách file sắp đưa lên. Thấy file lạ thì dừng lại kiểm tra.
+- Nếu lỡ commit thông tin bí mật: xóa file thôi là **chưa đủ** vì nó vẫn nằm trong lịch sử git. Hãy coi khóa đó đã bị lộ, đổi/thu hồi khóa ngay rồi mới dọn lịch sử.
