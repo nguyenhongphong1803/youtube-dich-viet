@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>YouTube Dịch Việt</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <img src="icons/icon48.png" alt="" width="28" height="28">
+    <h1>YouTube Dịch Việt</h1>
+    <label class="switch" title="Bật/tắt extension">
+      <input type="checkbox" id="enabled">
+      <span class="slider"></span>
+    </label>
+  </header>
+
+  <main id="settings">
+    <section>
+      <h2>Phụ đề</h2>
+      <label class="row"><input type="checkbox" id="showSub"> Hiện phụ đề tiếng Việt</label>
+      <label class="row"><input type="checkbox" id="bilingual"> Hiện song ngữ (gốc + Việt)</label>
+      <div class="range-row">
+        <label for="fontSize">Cỡ chữ phụ đề</label>
+        <span class="val" id="fontSizeVal"></span>
+      </div>
+      <input type="range" id="fontSize" min="14" max="48" step="1">
+    </section>
+
+    <section>
+      <h2>Đọc to</h2>
+      <label class="row"><input type="checkbox" id="speak"> Đọc to bản dịch tiếng Việt</label>
+
+      <div class="range-row">
+        <label for="rate">Tốc độ đọc</label>
+        <span class="val" id="rateVal"></span>
+      </div>
+      <input type="range" id="rate" min="0.8" max="2" step="0.1">
+
+      <div class="range-row">
+        <label for="duckVolume">Âm lượng tiếng gốc khi đọc</label>
+        <span class="val" id="duckVolumeVal"></span>
+      </div>
+      <input type="range" id="duckVolume" min="0" max="100" step="5">
+
+      <label for="voiceName" class="block-label">Giọng đọc</label>
+      <div class="voice-row">
+        <select id="voiceName"></select>
+        <button type="button" id="testVoice">Thử giọng</button>
+      </div>
+      <p class="warn" id="noVoice" hidden>
+        Không tìm thấy giọng tiếng Việt trên máy. Hãy cài giọng tiếng Việt:
+        Windows: Settings → Time &amp; Language → Language → thêm Tiếng Việt kèm Text-to-speech / Speech, rồi khởi động lại Chrome.
+        Microsoft Edge có sẵn các giọng Natural tiếng Việt (extension cũng chạy được trên Edge).
+      </p>
+    </section>
+  </main>
+
+  <footer>Thay đổi được áp dụng ngay trên tab YouTube đang mở.</footer>
+  <script src="popup.js"></script>
+</body>
+</html>

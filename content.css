@@ -1,0 +1,100 @@
+/* YouTube Dịch Việt — giao diện phụ đề chèn vào player */
+
+#ytdv-overlay {
+  --ytdv-fs: 24px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  z-index: 45; /* dưới thanh điều khiển của YouTube (~59) */
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  padding: 0 5%;
+  box-sizing: border-box;
+  transition: bottom 0.2s ease;
+}
+
+/* Khi thanh điều khiển đang hiện thì đẩy phụ đề lên */
+.html5-video-player:not(.ytp-autohide) #ytdv-overlay {
+  bottom: 64px;
+}
+
+#ytdv-overlay.ytdv-hidden,
+#ytdv-overlay .ytdv-box.ytdv-empty {
+  display: none;
+}
+
+#ytdv-overlay .ytdv-box {
+  max-width: 90%;
+  background: rgba(8, 8, 8, 0.75);
+  color: #fff;
+  border-radius: 6px;
+  padding: 4px 12px 6px;
+  text-align: center;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  line-height: 1.35;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  white-space: pre-line;
+}
+
+#ytdv-overlay .ytdv-vi {
+  font-size: var(--ytdv-fs);
+  font-weight: 500;
+}
+
+/* Câu gốc hiện tạm khi chưa có bản dịch (đang dịch hoặc dịch lỗi) */
+#ytdv-overlay .ytdv-vi.ytdv-pending {
+  font-style: italic;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+#ytdv-overlay .ytdv-orig {
+  font-size: calc(var(--ytdv-fs) * 0.75);
+  color: #ffe58a;
+  opacity: 0.95;
+}
+
+#ytdv-overlay .ytdv-orig:empty,
+#ytdv-overlay .ytdv-vi:empty {
+  display: none;
+}
+
+/* Toàn màn hình: phóng to chữ */
+.ytp-fullscreen #ytdv-overlay .ytdv-vi {
+  font-size: calc(var(--ytdv-fs) * 1.5);
+}
+.ytp-fullscreen #ytdv-overlay .ytdv-orig {
+  font-size: calc(var(--ytdv-fs) * 1.1);
+}
+.ytp-fullscreen:not(.ytp-autohide) #ytdv-overlay {
+  bottom: 90px;
+}
+
+/* Ẩn phụ đề gốc của YouTube khi đang hiển thị phụ đề Việt.
+   Dùng visibility thay vì display:none để DOM phụ đề vẫn cập nhật (cần cho chế độ dịch trực tiếp). */
+.ytdv-hide-cc .ytp-caption-window-container {
+  visibility: hidden !important;
+}
+
+/* Thông báo nhỏ góc trên trái video */
+#ytdv-notice {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 46;
+  max-width: 70%;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font: 500 13px/1.4 "Segoe UI", Roboto, Arial, sans-serif;
+  padding: 6px 10px;
+  border-radius: 4px;
+  border-left: 3px solid #da291c;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+#ytdv-notice.ytdv-show {
+  opacity: 1;
+}
